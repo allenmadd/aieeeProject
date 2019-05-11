@@ -21,7 +21,7 @@ global game
 game = Colorfight()
 
 # Connect to the server. This will connect to the public room.
-game.connect(room = 'public2')
+game.connect(room = 'public1')
 
 # game.register should return True if succeed.
 if game.register(username = 'Chlane', \
@@ -54,8 +54,9 @@ if game.register(username = 'Chlane', \
                 if(attackDict[i][0] - attackDict[i][1] > maxReward and attackAlloc > 100+attackDict[i][1]):
                     maxReward = attackDict[i][0] - attackDict[i][1]
                     best = i
-            cmd_list.append(game.attack(i,attackDict[best][1]) + np.random.randint(0,100))
-    
+            cmd_list.append(game.attack(i, attackDict[best][1]) + np.random.randint(0, 100))
+
+        result = game.send_cmd(cmd_list)
 
 
 

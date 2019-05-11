@@ -1,12 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 from colorfight import Colorfight
 from colorfight.user import User
-from colorfight.Position import Position
+#from colorfight.Position import Position
 from colorfight.constants import BLD_GOLD_MINE, BLD_ENERGY_WELL, BLD_FORTRESS
 
 class User2(User):
@@ -17,7 +11,7 @@ class User2(User):
         self.mines = 0
         self.forts = 0
         self.home = 1
-        self.homeLocation = Position(0,0)
+        self.homeLocation = 0
         self.tiles = len(self.cells)
         self.tilesTaken = 0
         self.tilesTakenTotal = 0

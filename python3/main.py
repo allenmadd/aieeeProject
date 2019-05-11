@@ -21,7 +21,7 @@ game = Colorfight()
 
 # Connect to the server. This will connect to the public room. If you want to
 # join other rooms, you need to change the argument
-game.connect(room = 'public4')
+game.connect(room = 'public2')
 
 # game.register should return True if succeed.
 # You need to set a password. For the example AI, the current time is used
@@ -30,7 +30,7 @@ game.connect(room = 'public4')
 if game.register(username = 'Chlane', \
                  password = 'charlesclaremadeleine'):
 
-    game.update_turn()
+
 
     # Check if you exist in the game. If not, wait for the next round.
     # You may not appear immediately after you join. But you should be
@@ -39,6 +39,9 @@ if game.register(username = 'Chlane', \
     me = game.me
     # This is the game loop
     while True:
+
+        game.update_turn()
+
         if game.me == None:
             continue
         #
@@ -53,12 +56,31 @@ if game.register(username = 'Chlane', \
         maxReward = 0
         bestAttack= ''
 
-        for x in attackDict.values():
-            if x[0]-x[1] > maxReward:
-                maxReward = x[0]-x[1]
-                bestAttack=attackDict(x)
+        if turn < 250:
+            for x in attackDict.values():
+                if x[0] - x[1] > maxReward:
+                    maxReward = x[0] - x[1]
+                    bestAttack = attackDict(x)
+        else:
+            if cell.building.can_upgrade and \
+                    (cell.building.is_home or cell.building.level < me.tech_level) and \
+                    cell.building.upgrade_gold < me.gold and \
+                    cell.building.upgrade_energy < me.energy:
+                cmd_list.append(game.upgrade(cell.position))
+
+                print("We upgraded ({}, {})".format(cell.position.x, cell.position.y))
+                me.gold   -= cell.building.upgrade_gold
+                me.energy -= cell.building.upgrade_energy
+            if cell.owner == me.uid and cell.building.is_empty and me.gold >= 100:
+                building = random.choice([BLD_FORTRESS, BLD_GOLD_MINE, BLD_ENERGY_WELL])
+                cmd_list.append(game.build(cell.position, building))
+                print("We build {} on ({}, {})".format(building, cell.position.x, cell.position.y))
+                me.gold -= 100
+
+
         #just adding this for demonstrative purposes
         cmd_list.append(game.attack(bestAttack, x[1]))
+        print(cmd_list)
         print(f"We are attacking ({pos.x}, {pos.y}) with {c.attack_cost} energy")
         game.me.energy -= c.attack_cost
         my_attack_list.append(c.position)
@@ -71,7 +93,7 @@ if game.register(username = 'Chlane', \
         #
         #Identify Nearby Players/ Use their previous plays to classify them
         #
-      #  classifyEnemies()
+          #  classifyEnemies()
 
         #
         #Decide what to do based on how we classify them

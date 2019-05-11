@@ -1,8 +1,6 @@
 #
-#Rogue Model 
-#aka what to do in the instance that the closest player is rogue
+#Classifying enemies
 #
-
 
 from colorfight import Colorfight
 import time

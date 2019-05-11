@@ -18,11 +18,9 @@ def assessField():
 
 	# Get all my cells.
 	for cell in game.me.cells.values():
-
             #figure out your adjacent cells
             for pos in cell.position.get_surrounding_cardinals():
-            	c = game.game_map[pos]
-                # Get the MapCell object of that position
+            	c = game.game_map[pos] # Get the MapCell object of that position
                 #
                 #attacking outcomes
                 #
@@ -36,8 +34,6 @@ def assessField():
 					#update dictionary if its possible to even get this 
 					if cellAttackValue[1] > me.energy:
 						attackDict.update({cellNames: cellAttackValue})
-
-
       	 	#
         	#upgrading outcomes
         	#
@@ -49,15 +45,5 @@ def assessField():
         		upgradeDict.update({cellNames : (cell.building.upgrade_gold, cell.building.upgrade_energy)})
 
         return attackDict, upgradeDict
-
-
-
-
-
-
-
-
-
-
 
 

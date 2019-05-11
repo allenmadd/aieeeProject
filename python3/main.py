@@ -1,5 +1,4 @@
 #
-#
 #Colorfight AI created by the 3 stooges
 # 11 May 2019
 #
@@ -8,9 +7,8 @@ from colorfight import Colorfight
 import time
 import random
 from colorfight.constants import BLD_GOLD_MINE, BLD_ENERGY_WELL, BLD_FORTRESS
-import classifyEnemies
-import evaluateTiles
-import move
+import assessField
+#DONT FORGET TO IMPORT THINGS
 
 
 
@@ -33,8 +31,26 @@ if game.register(username = 'Chlane', \
 
         #
         #Assess where we are 
+        #Input: nothing
+        #output: the taxes, cost/benefit of stuff
         #
-        evaluateTiles()
+        
+
+        #
+        #evaluate the value of the titles
+        #
+        attackDict, upgradeDict = assessField()
+
+        maxReward = 0
+        bestAttack= ''
+        
+        for x in attackDict.values():
+            if x[0]-x[1] > maxReward:
+                maxReward = x[0]-x[1]
+                bestAttack=attackDict(x)
+
+
+
 
         #
         #Identify Nearby Players/ Use their previous plays to classify them
@@ -45,6 +61,8 @@ if game.register(username = 'Chlane', \
         #Decide what to do based on how we classify them
         #
         move()
+
+
 
 
 

@@ -21,16 +21,14 @@ def assessField(game):
         for pos in cell.position.get_surrounding_cardinals():
             c = game.game_map[pos]
             if c.owner != game.uid:
-#attacking
+                #attacking
                 cellNames = str(cell.position.get_surrounding_cardinals(pos)) #name of the cell pos
                 cellAttackValue[0] = game.me.gold * (500-game.me.turn)
                 cellAttackValue[1] = c.attack_cost
-#update dictionary if its possible to even get this
+    #update dictionary if its possible to even get this
     if cellAttackValue[1] > game.me.energy:
         attackDict.update({cellNames: cellAttackValue})
-           #
-    #upgrading outcomes
-    #
+        #upgrading outcomes
         if cell.building.can_upgrade and \
         (cell.building.is_home or cell.building.level < game.me.tech_level) and \
         cell.building.upgrade_gold < game.me.gold and \

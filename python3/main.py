@@ -9,6 +9,9 @@ import time
 import random
 from colorfight.constants import BLD_GOLD_MINE, BLD_ENERGY_WELL, BLD_FORTRESS
 import classifyEnemies
+import evaluateTiles
+import move
+
 
 
 # Create a Colorfight Instance. This will be the object that you interact
@@ -31,16 +34,17 @@ if game.register(username = 'Chlane', \
         #
         #Assess where we are 
         #
+        evaluateTiles()
 
         #
         #Identify Nearby Players/ Use their previous plays to classify them
         #
         classifyEnemies()
 
-
         #
         #Decide what to do based on how we classify them
         #
+        move()
 
 
 

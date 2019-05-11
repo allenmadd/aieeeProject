@@ -10,8 +10,8 @@ def assessField(game):
 
 
     cellNames = ''
-    cellAttackValue = () #[0] the gold that you can earn from it for the rest of the game. [1] the amount of energy you have to spend
-    cellUpgradeValue = () #[0] the gold that you spend to upgrade [1] the energy you spend to upgrade (not actually used in this format)
+    cellAttackValue = [] #[0] the gold that you can earn from it for the rest of the game. [1] the amount of energy you have to spend
+    cellUpgradeValue = [] #[0] the gold that you spend to upgrade [1] the energy you spend to upgrade (not actually used in this format)
 
     attackDict =  {'Name' : 'Value'}
     upgradeDict = {'Name' : 'Value'}
@@ -23,18 +23,18 @@ def assessField(game):
             if c.owner != game.uid:
 #attacking
                 cellNames = str(cell.position.get_surrounding_cardinals(pos)) #name of the cell pos
-                cellAttackValue[0] = gold * (500-turn)
+                cellAttackValue[0] = game.me.gold * (500-game.me.turn)
                 cellAttackValue[1] = c.attack_cost
 #update dictionary if its possible to even get this
-    if cellAttackValue[1] > me.energy:
+    if cellAttackValue[1] > game.me.energy:
         attackDict.update({cellNames: cellAttackValue})
            #
     #upgrading outcomes
     #
         if cell.building.can_upgrade and \
-        (cell.building.is_home or cell.building.level < me.tech_level) and \
-        cell.building.upgrade_gold < me.gold and \
-        cell.building.upgrade_energy < me.energy:
+        (cell.building.is_home or cell.building.level < game.me.tech_level) and \
+        cell.building.upgrade_gold < game.me.gold and \
+        cell.building.upgrade_energy < game.me.energy:
             upgradeDict.update({cellNames : (cell.building.upgrade_gold, cell.building.upgrade_energy)})
 
     return attackDict, upgradeDict

@@ -10,6 +10,7 @@ import random
 from colorfight.constants import BLD_GOLD_MINE, BLD_ENERGY_WELL, BLD_FORTRESS
 from assessField import assessField
 from User2 import User2
+from move import move
 #DONT FORGET TO IMPORT THINGS
 
 # Create a Colorfight Instance.
@@ -38,14 +39,7 @@ if game.register(username = 'Chlane', \
         game.update_turn()
 
         #make a move
-        move() #CHARLES PUT THE CORRECT INPUTS HERE IF THEY ARE NEEDED AND SET TO THE CORRECT OUTPUTS IF NEEDED
-
-
-
-
-
-
-
+        move(game) #CHARLES PUT THE CORRECT INPUTS HERE IF THEY ARE NEEDED AND SET TO THE CORRECT OUTPUTS IF NEEDED
 
 
 

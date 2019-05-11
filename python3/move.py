@@ -15,7 +15,7 @@ from assessField import assessField
 
 def allocate(enemyClassifications, tileClassifications, selfBot, game, users):
     #determine resources to allocate to certain moves
-    .5*game.me.energy
+    return .5*game.me.energy
     
 
 

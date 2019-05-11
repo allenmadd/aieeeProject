@@ -38,5 +38,3 @@ class Classification:
         x = np.array[users.gold/max(users.gold), users.energy/max(users.energy), users.nearest/max(users.nearest), users.homeLocation/max(users.homeLocation)]
         weights = np.ones(len(x))
         return np.sum(x*weights,axis = 0)
-
-

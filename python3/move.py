@@ -14,8 +14,9 @@ from classify import Classification
 from assessField import assessField
 
 def allocate(enemyClassifications, tileClassifications, selfBot, game, users):
+    #determine resources to allocate to certain moves
+    .5*game.me.energy
     
-        
 
 
 def move(selfBot, game):

@@ -38,7 +38,14 @@ if game.register(username = 'Chlane', \
         game.update_turn()
 
         #make a move
-        move()
+        move() #CHARLES PUT THE CORRECT INPUTS HERE IF THEY ARE NEEDED AND SET TO THE CORRECT OUTPUTS IF NEEDED
+
+
+
+
+
+
+
 
 
 

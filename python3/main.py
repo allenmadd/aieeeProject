@@ -23,37 +23,25 @@ game.connect(room = 'public2')
 if game.register(username = 'Chlane', \
                  password = 'charlesclaremadeleine'):
 
-
-
-    # Check if you exist in the game. If not, wait for the next round.
-    me = game.me
-
     # This is the game loop
     while True:
-
-        game.update_turn()
-
-        if game.me == None:
-            continue
-        #
-        #evaluate the value of the titles
-        #
-
         # The command list we will send to the server
         cmd_list = []
         # The list of cells that we want to attack
         my_attack_list = []
 
-        attackDict, upgradeDict = assessField(game)
-        maxReward = 0
-        bestAttack= ''
+        # Check if you exist in the game. If not, wait for the next round.
+        me = game.me
+
+        if game.me == None:
+            continue
+        game.update_turn()
+
+        #make a move
+        move()
 
 
 
-  #          for x in attackDict.values():
-  #              if x[0] - x[1] > maxReward:
-  #                  maxReward = x[0] - x[1]
-  #                  bestAttack = attackDict(x)
 
 
         # Send the command list to the server

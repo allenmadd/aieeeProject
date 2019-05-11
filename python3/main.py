@@ -11,6 +11,9 @@ from colorfight.constants import BLD_GOLD_MINE, BLD_ENERGY_WELL, BLD_FORTRESS
 from assessField import assessField
 from User2 import User2
 from move import move
+import numpy as np
+from classify import Classification
+
 #DONT FORGET TO IMPORT THINGS
 
 # Create a Colorfight Instance.
@@ -39,8 +42,20 @@ if game.register(username = 'Chlane', \
         game.update_turn()
 
         #make a move
-        move(game) #CHARLES PUT THE CORRECT INPUTS HERE IF THEY ARE NEEDED AND SET TO THE CORRECT OUTPUTS IF NEEDED
-
+        users = game.users
+        attackDict = assessField(game)[0]
+        enemyClassifications = Classification(users,me.username)
+        attackAlloc = .5*me.energy #allocate(enemyClassifications, attackDict, me, game, users)
+        maxReward = 0
+        best = 0
+        while(best != -1):
+            best = -1
+            for i in attackDict:
+                if(attackDict[i][0] - attackDict[i][1] > maxReward and attackAlloc > 100+attackDict[i][1]):
+                    maxReward = attackDict[i][0] - attackDict[i][1]
+                    best = i
+            cmd_list.append(game.attack(i,attackDict[best][1]) + np.random.randint(0,100))
+    
 
 
 

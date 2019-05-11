@@ -19,15 +19,19 @@ def allocate(enemyClassifications, tileClassifications, selfBot, game, users):
     
 
 
-def move(selfBot, game):
+def move(game):
+    selfBot = game.me
+    users = game.users
     attackDict = assessField(game)[0]
     enemyClassifications = Classification(users,selfBot.username)
-    if(enemyClassifications.riskOfAttack > 1):
-        Defend
-    elif((enemyClassifications.benefitOfBlitz -enemyClassifications.goodness) > 1):
-        maxReward = 0
+    attackAlloc = allocate(enemyClassifications, attackDict, selfBot, game, users)
+    maxReward = 0
+    best = 0
+    while(best != -1):
         best = -1
-        for i in attackDict.keys:
-            if(attackDict[i][0] - attackDict[i][1]) > maxReward:
+        for i in attackDict:
+            if(attackDict[i][0] - attackDict[i][1] > maxReward and attackAlloc > 100+attackDict[i][1]):
                 maxReward = attackDict[i][0] - attackDict[i][1]
                 best = i
+        cmd_list.append(game.attack(i,attackDict[best][1]) + np.random.randint(0,100))
+    

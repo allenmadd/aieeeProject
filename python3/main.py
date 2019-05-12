@@ -39,7 +39,6 @@ if game.register(username = 'Chlane', \
 
         if game.me == None:
             continue
-        game.update_turn()
 
         #make a move
         users = game.users
@@ -51,12 +50,16 @@ if game.register(username = 'Chlane', \
         while(best != -1):
             best = -1
             for i in attackDict:
+                print(i.x, i.y)
                 if(attackDict[i][0] - attackDict[i][1] > maxReward and attackAlloc > 100+attackDict[i][1]):
                     maxReward = attackDict[i][0] - attackDict[i][1]
                     best = i
             cmd_list.append(game.attack(i, attackDict[best][1]) + np.random.randint(0, 100))
+            print("We are attacking ({}, {}) with {} energy".format(best.x, best.y, game[best].attack_cost))
+            attackDict[best] = -1
 
         result = game.send_cmd(cmd_list)
+        game.update_turn()
 
 
 
